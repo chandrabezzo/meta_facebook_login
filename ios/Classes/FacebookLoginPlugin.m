@@ -8,7 +8,7 @@
 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar> *)registrar {
   FlutterMethodChannel *channel = [FlutterMethodChannel
-      methodChannelWithName:@"com.roughike/flutter_facebook_login"
+      methodChannelWithName:@"com.roughike/meta_facebook_login"
             binaryMessenger:[registrar messenger]];
   FacebookLoginPlugin *instance = [[FacebookLoginPlugin alloc] init];
   [registrar addApplicationDelegate:instance];

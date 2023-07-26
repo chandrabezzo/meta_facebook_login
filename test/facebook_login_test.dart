@@ -1,13 +1,12 @@
 import 'package:flutter/services.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-import 'package:flutter_facebook_login/src/clock.dart';
+import 'package:meta_facebook_login/meta_facebook_login.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'custom_matchers.dart';
 
 void main() {
   group('$FacebookLogin', () {
-    const channel = MethodChannel('com.roughike/flutter_facebook_login');
+    const channel = MethodChannel('com.roughike/meta_facebook_login');
 
     final beforeExpiry =
         DateTime.fromMillisecondsSinceEpoch(1463378399999, isUtc: true);

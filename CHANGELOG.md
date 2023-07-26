@@ -1,3 +1,6 @@
+## 4.0.0
+* Migrate to Android V2 Embedding
+
 ## 3.0.0
 * Update Android & iOS Facebook Login dependencies to `5.5`
 * Removed deprecated method `loginWithPublishPermissions` and renamed `loginWithReadPermission` to `login`
@@ -7,7 +10,7 @@
 
 ## 2.0.1
 
-* [#128](https://github.com/roughike/flutter_facebook_login/pull/128): Pin down FBSDKCoreKit to the same version as FBSDKLoginKit.
+* [#128](https://github.com/roughike/meta_facebook_login/pull/128): Pin down FBSDKCoreKit to the same version as FBSDKLoginKit.
 
 ## 2.0.0
 

@@ -1,23 +1,24 @@
 import 'dart:async';
 
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter/material.dart';
+import 'package:meta_facebook_login/meta_facebook_login.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key key}) : super(key: key);
+
   @override
-  _MyAppState createState() => new _MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
-  static final FacebookLogin facebookSignIn = new FacebookLogin();
+class MyAppState extends State<MyApp> {
+  static final FacebookLogin facebookSignIn = FacebookLogin();
 
   String _message = 'Log in/out by pressing the buttons below.';
 
-  Future<Null> _login() async {
-    final FacebookLoginResult result =
-        await facebookSignIn.logIn(['email']);
+  Future<void> _login() async {
+    final FacebookLoginResult result = await facebookSignIn.logIn(['email']);
 
     switch (result.status) {
       case FacebookLoginStatus.loggedIn:
@@ -42,7 +43,7 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  Future<Null> _logOut() async {
+  Future<void> _logOut() async {
     await facebookSignIn.logOut();
     _showMessage('Logged out.');
   }
@@ -55,23 +56,23 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Plugin example app'),
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Plugin example app'),
         ),
-        body: new Center(
-          child: new Column(
+        body: Center(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Text(_message),
-              new RaisedButton(
+              Text(_message),
+              ElevatedButton(
                 onPressed: _login,
-                child: new Text('Log in'),
+                child: const Text('Log in'),
               ),
-              new RaisedButton(
+              ElevatedButton(
                 onPressed: _logOut,
-                child: new Text('Logout'),
+                child: const Text('Logout'),
               ),
             ],
           ),
