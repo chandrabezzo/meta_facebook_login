@@ -1,3 +1,6 @@
+## 4.0.2
+* Support from 3.3.10
+
 ## 4.0.1
 * Remove dependency plugin platform interface
 
