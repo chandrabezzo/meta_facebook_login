@@ -4,19 +4,26 @@ version: 4.0.0
 issue_tracker: https://github.com/chandrabezzo/meta_facebook_login/issues
 homepage: https://github.com/chandrabezzo/meta_facebook_login
 
+environment:
+  flutter: ">=3.7.12"
+  sdk: ">=2.2.2 <3.0.0"
+
 dependencies:
   flutter:
     sdk: flutter
   collection: ^1.0.0
+  plugin_platform_interface: ^2.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^2.0.0
 
 flutter:
   plugin:
-    androidPackage: com.roughike.facebooklogin.facebooklogin
-    pluginClass: FacebookLoginPlugin
-
-environment:
-  sdk: ">=2.2.2 <3.0.0"
+    platforms:
+      android:
+        package: com.roughike.facebooklogin.facebooklogin
+        pluginClass: FacebookLoginPlugin
+      ios:
+        pluginClass: FacebookLoginPlugin

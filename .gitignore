@@ -10,3 +10,8 @@ packages
 pubspec.lock
 .fvm
 .vscode
+example/.vscode/settings.json
+example/android/gradle/wrapper/gradle-wrapper.jar
+example/android/gradlew
+example/android/gradlew.bat
+example/ios/Flutter/flutter_export_environment.sh
