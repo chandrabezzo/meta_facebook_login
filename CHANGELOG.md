@@ -1,3 +1,6 @@
+## 4.0.1
+* Remove dependency plugin platform interface
+
 ## 4.0.0
 * Migrate to Android V2 Embedding
 

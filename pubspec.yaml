@@ -1,6 +1,6 @@
 name: meta_facebook_login
 description: A Flutter plugin for allowing users to authenticate with native Android &amp; iOS Facebook login SDKs.
-version: 4.0.0
+version: 4.0.1
 issue_tracker: https://github.com/chandrabezzo/meta_facebook_login/issues
 homepage: https://github.com/chandrabezzo/meta_facebook_login
 
@@ -12,7 +12,6 @@ dependencies:
   flutter:
     sdk: flutter
   collection: ^1.0.0
-  plugin_platform_interface: ^2.0.0
 
 dev_dependencies:
   flutter_test:
