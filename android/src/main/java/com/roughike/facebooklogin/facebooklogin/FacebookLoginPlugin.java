@@ -41,7 +41,7 @@ public class FacebookLoginPlugin implements FlutterPlugin, MethodCallHandler {
     private final FacebookSignInDelegate delegate;
     private MethodChannel channel;
 
-    private FacebookLoginPlugin() {
+    public FacebookLoginPlugin() {
         delegate = new FacebookSignInDelegate();
     }
 
