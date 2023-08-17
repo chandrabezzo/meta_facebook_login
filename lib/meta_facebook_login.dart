@@ -53,7 +53,6 @@ class FacebookLogin {
   ///
   /// Ignored on iOS, as it's not supported by the iOS Facebook Login SDK anymore.
   set loginBehavior(FacebookLoginBehavior behavior) {
-    assert(behavior != null, 'The login behavior cannot be null.');
     _loginBehavior = behavior;
   }
 
@@ -84,8 +83,8 @@ class FacebookLogin {
   ///
   /// NOTE: This might return an access token that has expired. If you need to be
   /// sure that the token is still valid, call [isValid] on the access token.
-  Future<FacebookAccessToken> get currentAccessToken async {
-    final Map<dynamic, dynamic> accessToken =
+  Future<FacebookAccessToken?> get currentAccessToken async {
+    final Map<dynamic, dynamic>? accessToken =
         await channel.invokeMethod('getCurrentAccessToken');
 
     if (accessToken == null) {
@@ -128,8 +127,6 @@ class FacebookLogin {
   Future<void> logOut() async => channel.invokeMethod('logOut');
 
   String _currentLoginBehaviorAsString() {
-    assert(_loginBehavior != null, 'The login behavior was unexpectedly null.');
-
     switch (_loginBehavior) {
       case FacebookLoginBehavior.nativeWithFallback:
         return 'nativeWithFallback';
@@ -140,8 +137,6 @@ class FacebookLogin {
       case FacebookLoginBehavior.webViewOnly:
         return 'webViewOnly';
     }
-
-    throw StateError('Invalid login behavior.');
   }
 
   /// There's a weird bug where calling Navigator.push (or any similar method)
@@ -213,13 +208,13 @@ class FacebookLoginResult {
   ///
   /// Only available when the [status] equals [FacebookLoginStatus.loggedIn],
   /// otherwise null.
-  final FacebookAccessToken accessToken;
+  final FacebookAccessToken? accessToken;
 
   /// The error message when the log in flow completed with an error.
   ///
   /// Only available when the [status] equals [FacebookLoginStatus.error],
   /// otherwise null.
-  final String errorMessage;
+  final String? errorMessage;
 
   FacebookLoginResult._(Map<String, dynamic> map)
       : status = _parseStatus(map['status']),

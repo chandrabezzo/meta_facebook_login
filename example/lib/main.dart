@@ -6,7 +6,7 @@ import 'package:meta_facebook_login/meta_facebook_login.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   MyAppState createState() => MyAppState();
@@ -22,15 +22,15 @@ class MyAppState extends State<MyApp> {
 
     switch (result.status) {
       case FacebookLoginStatus.loggedIn:
-        final FacebookAccessToken accessToken = result.accessToken;
+        final FacebookAccessToken? accessToken = result.accessToken;
         _showMessage('''
          Logged in!
          
-         Token: ${accessToken.token}
-         User id: ${accessToken.userId}
-         Expires: ${accessToken.expires}
-         Permissions: ${accessToken.permissions}
-         Declined permissions: ${accessToken.declinedPermissions}
+         Token: ${accessToken?.token}
+         User id: ${accessToken?.userId}
+         Expires: ${accessToken?.expires}
+         Permissions: ${accessToken?.permissions}
+         Declined permissions: ${accessToken?.declinedPermissions}
          ''');
         break;
       case FacebookLoginStatus.cancelledByUser:

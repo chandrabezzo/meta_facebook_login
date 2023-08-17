@@ -5,6 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'custom_matchers.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   group('$FacebookLogin', () {
     const channel = MethodChannel('com.roughike/meta_facebook_login');
 
@@ -40,35 +42,36 @@ void main() {
     };
 
     final log = <MethodCall>[];
-    FacebookLogin sut;
+    late FacebookLogin sut;
 
-    void setMethodCallResponse(Map<String, dynamic> response) {
-      channel.setMockMethodCallHandler((methodCall) {
+    void setMethodCallResponse(Map<String, dynamic>? response) {
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(channel, (methodCall) {
         log.add(methodCall);
         return Future.value(response);
       });
     }
 
-    void expectExpiresDateParsedCorrectly(DateTime dateTime) {
-      expect(dateTime.year, 2016);
-      expect(dateTime.month, 5);
-      expect(dateTime.day, 16);
-      expect(dateTime.hour, 6);
-      expect(dateTime.minute, 0);
-      expect(dateTime.second, 0);
-      expect(dateTime.millisecond, 0);
+    void expectExpiresDateParsedCorrectly(DateTime? dateTime) {
+      expect(dateTime?.year, 2016);
+      expect(dateTime?.month, 5);
+      expect(dateTime?.day, 16);
+      expect(dateTime?.hour, 6);
+      expect(dateTime?.minute, 0);
+      expect(dateTime?.second, 0);
+      expect(dateTime?.millisecond, 0);
     }
 
-    void expectAccessTokenParsedCorrectly(FacebookAccessToken accessToken) {
-      expect(accessToken.token, 'test_token');
-      expect(accessToken.userId, 'test_user_id');
-      expectExpiresDateParsedCorrectly(accessToken.expires);
-      expect(accessToken.permissions, [
+    void expectAccessTokenParsedCorrectly(FacebookAccessToken? accessToken) {
+      expect(accessToken?.token, 'test_token');
+      expect(accessToken?.userId, 'test_user_id');
+      expectExpiresDateParsedCorrectly(accessToken?.expires);
+      expect(accessToken?.permissions, [
         'test_permission_1',
         'test_permission_2',
       ]);
 
-      expect(accessToken.declinedPermissions, [
+      expect(accessToken?.declinedPermissions, [
         'test_declined_permission_1',
         'test_declined_permission_2',
       ]);
@@ -93,7 +96,7 @@ void main() {
       setMethodCallResponse(kLoggedInResponse);
 
       final result = await sut.logIn([]);
-      final map = result.accessToken.toMap();
+      final map = result.accessToken?.toMap();
 
       expect(
         map,
@@ -121,13 +124,6 @@ void main() {
       final second = FacebookAccessToken.fromMap(kAccessToken);
 
       expect(first, equals(second));
-    });
-
-    test('loginBehavior - with null argument', () async {
-      setMethodCallResponse(null);
-
-      // Setting a null login behavior is not allowed.
-      expect(() => sut.loginBehavior = null, throwsAssertionError);
     });
 
     test('loginBehavior - nativeWithFallback is the default', () async {
@@ -288,7 +284,7 @@ void main() {
       Clock.dateTimeResolver = () => beforeExpiry;
 
       final accessToken = await sut.currentAccessToken;
-      expect(accessToken.isValid(), isTrue);
+      expect(accessToken?.isValid(), isTrue);
     });
 
     test('FacebookAccessToken#isValid() - when expired, returns false',
@@ -298,7 +294,7 @@ void main() {
       Clock.dateTimeResolver = () => afterExpiry;
 
       final accessToken = await sut.currentAccessToken;
-      expect(accessToken.isValid(), isFalse);
+      expect(accessToken?.isValid(), isFalse);
     });
   });
 }
