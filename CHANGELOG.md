@@ -1,3 +1,6 @@
+## 4.0.3
+* Support from Flutter 3.10
+
 ## 4.0.2
 * Support from 3.3.10
 
